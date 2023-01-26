@@ -1,0 +1,16 @@
+.setsignup{
+    width: 543px;
+    height: 670px;
+    padding: 10px;
+    border-radius: 30px;
+    border-color: darkgray;
+    
+}
+.myinputbox{
+    height: 45px;
+    margin: -2px;
+}
+.set{
+    margin-top: -4px;
+    margin-bottom: 0rem;
+}

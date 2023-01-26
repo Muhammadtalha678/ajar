@@ -1,0 +1,23 @@
+.bgcolor{
+    background-color: lightgray;
+}
+.changecolor{
+    color:green;
+    font-weight: 900;
+}
+.changetext{
+    font-weight: bold;
+    font-size: 25px;
+}
+.loginbox{
+    border-radius: 10px;
+    padding-top: 25px;
+    height: 353px;
+    width:450px;
+}
+.myinputbox{
+    padding:10px;
+}
+.mybuttonbox2{
+    width:192px;
+}

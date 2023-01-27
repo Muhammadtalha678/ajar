@@ -64,8 +64,26 @@
                         
                         
                         <p class="show-read-more">{{ $postData->caption }}.</p>
+                        <div class="post-images" style=" display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;">
+                            @foreach(json_decode($postData->images) as $image)
+                                    <img src="{{ asset('/filenames/'.$image) }}" alt="" style="width: 100%;">
+                            @endforeach    
+                        </div>
                         
                     </div>
+                   <script>
+    $(document).ready(function() {
+        var images = $("img");
+        var imageCount = images.length;
+        var imagesPerRow = 2;
+        for (var i = 0; i < imageCount; i += imagesPerRow) {
+            images.slice(i, i + imagesPerRow).wrapAll("<div class='row'></div>");
+        }
+        $('.row').appendTo('.post-images');
+    });
+</script>
                     
                     <!-- likes -->
                     <!-- comments start-->

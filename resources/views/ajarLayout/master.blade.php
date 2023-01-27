@@ -61,7 +61,7 @@
                 .my-anchor:hover .icon {
                     transform: rotate(360deg);
                 }
-
+                
             </style>
         </head>
         <body class="bg-gray postion-relative">
@@ -111,11 +111,14 @@
                                 <i  class="fas fa-cog text-primary fs-2"></i>
                                 </a>
                             </div>
+                                <form action="{{ route('logout') }}" method="post">
                             <div class="mx-4 nav__btn">
-                                <a type="button" class="my-anchor btn px-4" href="{{ route('logout') }}" title="logout">
+                                    @csrf
+                                <button type="submit" class="my-anchor btn px-4" title="logout">
                                 <i  class="fas fa-sign-out-alt text-primary fs-2"></i>
-                                </a>
+                                </button>
                             </div>
+                                </form>
                         </div>
                         <div class="col-sm-2">
                         </div>

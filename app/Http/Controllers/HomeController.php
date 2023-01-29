@@ -48,37 +48,66 @@ class HomeController extends Controller
         // $postDatas = Post::find(2);
     	return view('ajarfirstpage.newsfeed',compact('postDatas'));
     }
+    public function showNonVerifyPost()
+    {
+        $NonVerifypostDatass = Post::with(['votechild' => function($query){
+            $query->select('post_id',DB::raw('SUM(upvote) as total_upvotes'))
+            ->groupBy('post_id')->orderBy('total_upvotes','Desc');
+        }])->get();
+        
+        // $showdownvote = Post::with('votechild')->get();
+        // ya jo $postDatas ky jo array hain un ki indexing kary ga descending order ky hisab sy js ky ziada upvote hn ky us array ka index no likh kr return kr dy ga 
+        $NonVerifypostDatas = $NonVerifypostDatass->sortByDesc(function($post) {
+            return $post->votechild->first()->total_upvotes ?? 0;
+        });
+        return view('ajar-Non-Verify-page.showNonVerifyPost',compact('NonVerifypostDatas'));
+
+    }
     // STORE POST WITH USER_ID-NAME-IMAGE
     public function store(Request $request)
     {
+        // var_dump($request->file('videos'));exit();
     	$request->validate([
     		'caption' => 'required',
     		'verified' => 'required',
     		'donation_amount' => 'required|numeric',
     		// 'documents' => 'required',
     		'images.*' => 'required|image|mimes:jpeg,png,jpg',
-    		'images' => 'required'
+    		'images' => 'required',
+            'videos.*' => 'file|mimetypes:video/mp4,video/ogg,video/webm',
     		// 'videos' => 'required',
     	]);
-    	if ($request->hasfile('images')) {
+    	if ($request->hasfile('images') || $request->hasfile('videos')) {
 	    	foreach ($request->file('images') as $image) {
 	    		$ImageName = time().rand(1,100).'.'.$image->extension();
 	    		$image->move(public_path('filenames'),$ImageName);
 	    		$filenames[] = $ImageName;
 	    	}
+            // $videofilenames;
+            foreach ($request->file('videos') as $video) {
+                $Videoname = time().rand(1,100).'.'.$video->extension();
+                $video->move(public_path('Postvideo'),$Videoname);
+                $videofilenames[] = $Videoname;
+            }
+            // var_dump($videofilenames);exit();
 	    	$images = json_encode($filenames);
+            $videos = json_encode($videofilenames);
 	    	Post::create([
 	    		'caption' => $request->caption,
 	    		'verified' => $request->verified,
 	    		'donation_amount' => $request->donation_amount,
                 'remaining_amount' => $request->donation_amount,
 	    		'images' => $images,
+                'videos' => $videos,
 	    		'user_id' => Auth::user()->id,
 	    		'user_name' => Auth::user()->name,
                 'user_image' => Auth::user()->user_image,
 	    		// 'created_at' => $currentTime,
 	    		// 'updated_at' => $currentTime
 	    	]);
+            if ($request->verified == 'Non-Verify') {
+            return redirect()->route('ajarLayout.nonVerifynewsfeed')->with('success','Post Create Successfully');
+            }
 	    	return redirect()->route('ajarLayout.newsfeed')->with('success','Post Create Successfully');
     	}
     	// Post::create([

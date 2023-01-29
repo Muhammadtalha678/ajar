@@ -35,6 +35,16 @@
                     width: 30%;
                     margin-bottom: 10px;
                 }
+                #videos-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                }
+
+                #videos-container img {
+                    width: 30%;
+                    margin-bottom: 10px;
+                }
                 .xuxw1ft {
                     white-space: nowrap;
  
@@ -61,7 +71,7 @@
                 .my-anchor:hover .icon {
                     transform: rotate(360deg);
                 }
-                
+
             </style>
         </head>
         <body class="bg-gray postion-relative">
@@ -81,12 +91,12 @@
                             <div class="mx-4 nav__btn">
                                 <a type="button" href="{{ route('ajarLayout.newsfeed') }}" class="my-anchor btn px-4">
                                 <i class="fas fa-check-circle text-success fs-2"></i>
-                                <span class="icon fa fa-arrow-up">&#x25B2;</span> 
+                                {{-- <span class="icon fa fa-arrow-up">&#x25B2;</span>  --}}
                                 </a>
                             </div>
                             <!-- market -->
                             <div class="mx-4 nav__btn">
-                                <a type="button" href="{{ route('ajarLayout.newsfeed') }}" class="my-anchor btn px-4"> 
+                                <a type="button" href="{{ route('ajarLayout.nonVerifynewsfeed') }}" class="my-anchor btn px-4"> 
                                 <i class="fas fa-check-circle text-danger fs-2"></i>
                                 </a>
                             </div>

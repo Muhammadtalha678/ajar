@@ -17,6 +17,12 @@
     @endif
     <div class="col-12 col-lg-9 pb-5 ">
         <div class="d-flex flex-column justify-content-center w-100 mx-auto" style="padding-top: 56px; max-width: 850px">
+            @if(session()->has("success"))
+            <div class="alert alert-success alert-block" id="error">
+              <button type="button" class="close" data-dismiss="alert">×</button> 
+                    <strong>{{ session()->get("success") }}</strong>
+            </div>
+            @endif
             <!-- create post -->
             <div class="bg-white p-3 mt-3 rounded border shadow">
                 <!-- avatar -->

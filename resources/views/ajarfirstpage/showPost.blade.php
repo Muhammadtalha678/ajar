@@ -1,4 +1,6 @@
 @foreach($postDatas as $postData)
+@if($postData->verified != 'Non-Verify')
+
         <div class="bg-white p-4 rounded shadow mt-3">
                 <!-- author -->
                 @error('donation_amount', 'post_'.$postData->id)
@@ -64,27 +66,33 @@
                         
                         
                         <p class="show-read-more">{{ $postData->caption }}.</p>
-                        <div class="post-images" style=" display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;">
+                        <div class="post-images" style="background-color:lightgreen;display: flex; flex-wrap:wrap; ">
                             @foreach(json_decode($postData->images) as $image)
-                                    <img src="{{ asset('/filenames/'.$image) }}" alt="" style="width: 100%;">
-                            @endforeach    
+                                    <img src="{{ asset('/filenames/'.$image) }}"  onclick="openImage(this.src)" class="post-image" style="width: 30%;margin: 10px">
+                            @endforeach
+                            {{-- {{ $postData->videos }} --}}
+                            @if($postData->videos)
+                                @foreach(json_decode($postData->videos) as $video){{-- 
+                                    <video controls onclick="openImage(this.src)" >
+                                        <source src="{{ asset('/Postvideo/'.$video) }}" type="video/mp4" onclick="openVideo(this.src)">
+                                    </video> --}}
+                                    <video onclick="openVideo(this.src)" src="{{ asset('/Postvideo/'.$video) }}" style="width: 30%;margin: 10px"  controls ></video>
+                                @endforeach
+                            @endif
                         </div>
+
                         
                     </div>
-                   <script>
-    $(document).ready(function() {
-        var images = $("img");
-        var imageCount = images.length;
-        var imagesPerRow = 2;
-        for (var i = 0; i < imageCount; i += imagesPerRow) {
-            images.slice(i, i + imagesPerRow).wrapAll("<div class='row'></div>");
-        }
-        $('.row').appendTo('.post-images');
-    });
-</script>
-                    
+                    <script>
+                        function openImage(src) {
+                            window.open(src,'_blank');
+                        }
+                    </script>
+                    <script>
+                        function openVideo(src) {
+                            window.open(src,'_blank');
+                        }
+                    </script>
                     <!-- likes -->
                     <!-- comments start-->
                     <div class="accordion" id="accordionExample">
@@ -185,4 +193,5 @@
                     <!-- end -->
                 </div>
         </div>
+@endif
 @endforeach

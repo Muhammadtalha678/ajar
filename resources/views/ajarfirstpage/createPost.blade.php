@@ -104,6 +104,22 @@
         <input type="hidden" name="id" value="{{ Auth::user()->id }}">
         <button type="button" id="add-images-button">Add Images</button>
     </div>
+     <div class="form-group mb-3">
+        <input type="file" class="form-control" name="videos[]" id="videos" multiple style="display:none" accept="video/mp4, video/webm, video/ogg">
+        
+        <div class="videos-preview mb-3" id="videos-container">
+            {{-- <?php var_dump(old('images.*') != ''); ?> --}}
+           {{--   @if(old('images'))
+            @foreach(old('images') as $image)
+                <img src="{{ $image }}" alt="Image">
+            @endforeach
+            @endif --}}
+            
+            <!-- Add more images here -->
+        </div>
+        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+        <button type="button" id="add-videos-button">Add Videos</button>
+    </div>
     <button type="submit" class="btn btn-primary" id="create-post-button">Post</button>
 </form>
 
@@ -134,4 +150,33 @@ img.src = imgURL;
 imagesPreview.appendChild(img);
 }
 });
+</script>
+<script>
+    var filevideoInput = document.getElementById('videos');
+    var videosPreview = document.querySelector('.videos-preview');
+    // Add event listener to add-images-button
+    document.getElementById('add-videos-button').addEventListener('click', function() {
+    filevideoInput.click();
+    });
+    // Listen for changes on the file input
+    filevideoInput.addEventListener('change', function() {
+    // Get the selected files
+    var files = this.files;
+    // Loop through the files
+    for (var i = 0; i < files.length; i++) {
+    // Create an img element
+    var video = document.createElement('video');
+    var videoSource = document.createElement('source');
+    // Create a URL for the image
+    video.appendChild(videoSource);
+    var videoURL = URL.createObjectURL(files[i]);
+    // console.log(imgURL);
+    // Set the src of the img element to the image URL
+    video.src = videoURL;
+    video.height = '200';
+    video.width = '200';
+    // Add the img element to the images preview container
+    videosPreview.appendChild(video);
+    }
+    });
 </script>

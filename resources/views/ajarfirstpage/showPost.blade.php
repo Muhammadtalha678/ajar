@@ -1,5 +1,5 @@
 @foreach($postDatas as $postData)
-@if($postData->verified != 'Non-Verify')
+@if($postData->verified != 'Non-Verify' && $postData->verification_check == 'Verified')
 
         <div class="bg-white p-4 rounded shadow mt-3">
                 <!-- author -->
@@ -163,7 +163,23 @@
                                         <?php $upvoteInc+=$upvote->total_upvotes;?>
 
                                    @endforeach
-                                                ({{ $upvoteInc }})
+
+                                   @if($upvoteInc < 900)
+                                        {{-- // 0 - 900 --}}
+                                        <p>{{ $upvoteInc}}</p>
+                                    @elseif($upvoteInc < 900000)
+                                        {{-- // 0.9k-850k --}}
+                                        <p>({{ round($upvoteInc/1000). "K"}})</p>
+                                    @elseif($upvoteInc < 900000000)
+                                        {{-- // 0.9m-850m --}}
+                                        <p>({{ round($upvoteInc/1000000). "M"}})</p>
+                                    @elseif($upvoteInc < 900000000000)
+                                        {{-- // 0.9b-850b --}}
+                                        <p>({{ round($upvoteInc/1000000000). "B"}})</p>
+                                    @else
+                                        {{-- // 0.9t+ --}}
+                                        <p>({{ round($upvoteInc/1000000000000). "T"}})</p>
+                                   @endif 
                                 </div>
                                     {{-- {{ $postData->votechild }} --}}
 

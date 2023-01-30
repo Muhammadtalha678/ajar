@@ -18,11 +18,16 @@ class CreateVerifiedPostingTable extends Migration
             $table->string('caption');
             $table->string('verified')->default('Non-Verified')->nullable();
             $table->integer('donation_amount');
+            $table->integer('remaining_amount');
             $table->string('documents')->nullable();
-            $table->string('image')->nullable();
+            $table->string('images')->nullable();
             $table->string('videos')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('user_id');
+            $table->string('user_name');
+            $table->string('user_emailorphone');
+            $table->string('user_image');
+            $table->string('verification_check');
+            $table->timestamps();
         });
     }
 

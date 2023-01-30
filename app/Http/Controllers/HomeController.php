@@ -66,7 +66,7 @@ class HomeController extends Controller
     // STORE POST WITH USER_ID-NAME-IMAGE
     public function store(Request $request)
     {
-        // var_dump($request->file('videos'));exit();
+        // var_dump(Auth::user()->email);exit();
     	$request->validate([
     		'caption' => 'required',
     		'verified' => 'required',
@@ -102,6 +102,8 @@ class HomeController extends Controller
 	    		'user_id' => Auth::user()->id,
 	    		'user_name' => Auth::user()->name,
                 'user_image' => Auth::user()->user_image,
+                'user_emailorphone' => Auth::user()->email,
+                'verification_check' => "Process"
 	    		// 'created_at' => $currentTime,
 	    		// 'updated_at' => $currentTime
 	    	]);

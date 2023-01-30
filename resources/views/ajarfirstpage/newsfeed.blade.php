@@ -23,6 +23,12 @@
                     <strong>{{ session()->get("success") }}</strong>
             </div>
             @endif
+            @if(session()->has("error"))
+            <div class="alert alert-danger alert-block" id="error">
+              <button type="button" class="close" data-dismiss="alert">×</button> 
+                    <strong>{{ session()->get("error") }}</strong>
+            </div>
+            @endif
             <!-- create post -->
             <div class="bg-white p-3 mt-3 rounded border shadow">
                 <!-- avatar -->

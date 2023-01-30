@@ -18,6 +18,8 @@ class CreateVotesTable extends Migration
                   $table->unsignedBigInteger('post_id');
                   $table->unsignedBigInteger('user_id');
                   $table->tinyInteger('vote');
+                  $table->integer('upvote');
+                  $table->integer('downvote');
                   $table->timestamps();
         });
     }

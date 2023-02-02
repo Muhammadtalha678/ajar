@@ -95,6 +95,22 @@
                   font: bold 14px "Quicksand", sans-serif;
                   color: #ffffff;
                 }
+                .btns{
+                  position: absolute;
+                   top: 260px;
+                  left: 808px; 
+                  display: flex; 
+                }
+                .btn2{
+                  background: transparent;
+                  border: none;
+                  font-size: 30px;
+                  color: grey;
+                }
+
+                .btn2 i:hover{
+                  cursor: pointer;
+                }
             </style>
         </head>
         <body class="bg-gray postion-relative">

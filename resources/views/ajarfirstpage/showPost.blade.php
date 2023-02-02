@@ -56,7 +56,22 @@
                                         {{ Carbon\Carbon::parse($postData->created_at)->format('l M j, Y') }} at {{ $postData->created_at->format('h:i A') }} .  @include('ajarfirstpage.facebooktimeIcon')
                                     @endif
                             </span>
-                            
+                            <div class="btns">
+                              <Button onclick="Toggle1()" id="btnh1" class="btn2"><i class="fas fa-heart"></i></Button>
+                            </div>
+                            <script>
+                                var btnvar1 = document.getElementById('btnh1');
+                                function Toggle1(){
+
+                                if (btnvar1.style.color == "grey") {
+                                    btnvar1.style.color = 'yellow';
+                                }
+                                else{
+                                    btnvar1.style.color = 'grey';
+                                }
+                                }
+                            </script>
+
                             <!-- <label class="heart" for="heart-checkbox"></label> -->
                         </div>
                     </div>

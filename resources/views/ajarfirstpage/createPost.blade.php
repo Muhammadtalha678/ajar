@@ -122,6 +122,11 @@
     </div>
     <button type="submit" class="btn btn-primary" id="create-post-button">Post</button>
 </form>
+<div id="usernameContainer">
+  <p id="username">{{ Auth::user()->name }}</p>
+  <button id="editBtn">Edit</button>
+</div>
+
 
 <script>
 // Select the file input and add images preview container
@@ -131,7 +136,7 @@ var imagesPreview = document.querySelector('.images-preview');
 document.getElementById('add-images-button').addEventListener('click', function() {
 fileInput.click();
 });
-// Listen for changes on the file input
+Re// Listen for changes on the file input
 fileInput.addEventListener('change', function() {
 // Get the selected files
 var files = this.files;

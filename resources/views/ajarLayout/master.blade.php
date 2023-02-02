@@ -71,7 +71,30 @@
                 .my-anchor:hover .icon {
                     transform: rotate(360deg);
                 }
+                .progress {
+                  position: relative;
+                  width: 380px;
+                  height: 40px;
+                  background:lightgray;
+                  border-radius: 5px;
+                  overflow: hidden;
+                }
 
+                .progress__fill {
+                  width: 0%;
+                  height: 100%;
+                  background: green;
+                  transition: all 0.2s;
+                }
+
+                .progress__text {
+                  position: absolute;
+                  top: 50%;
+                  left:10px;
+                  transform: translateY(-50%);
+                  font: bold 14px "Quicksand", sans-serif;
+                  color: #ffffff;
+                }
             </style>
         </head>
         <body class="bg-gray postion-relative">
@@ -82,7 +105,8 @@
                         <!-- search -->
                         <div class="col-sm-2 d-sm-flex align-items-center">
                             <!-- logo -->
-                            <i class="fab fa-facebook text-success" style="font-size: 3rem"></i>
+                            {{-- <i class="fab fa-facebook text-success" style="font-size: 3rem"></i> --}}
+                            <img src="{{ asset('ajarlogo1.jpg') }}" width="250" height="50">
                             <!-- search bar -->
                         </div>
                         <!-- nav -->
@@ -90,7 +114,7 @@
                             <!-- home -->
                             <div class="mx-4 nav__btn">
                                 <a type="button" href="{{ route('ajarLayout.newsfeed') }}" class="my-anchor btn px-4">
-                                <i class="fas fa-check-circle text-success fs-2"></i>
+                                <i class="fas fa-check-circle fs-2" style="color: lightgreen"></i>
                                 {{-- <span class="icon fa fa-arrow-up">&#x25B2;</span>  --}}
                                 </a>
                             </div>
@@ -155,7 +179,7 @@
                             >
                             <!-- terms -->
                             <!-- <div class="p-2 mt-5">
-                                <p class="text-muted fs-7">
+                                <p class="text-muted fs-2">
                                     Privacy &#8226; Terms &#8226; Advertising &#8226; Ad Choices
                                     &#8226; Cookies &#8226; Flexbook © 2021
                                 </p>

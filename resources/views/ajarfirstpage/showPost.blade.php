@@ -114,7 +114,7 @@
                                             <div>
                                                 Remaining Amount : {{ $postData->remaining_amount }} Rs
                                             </div>
-                                            <div style="width: 100%;height: 20px;background-color: #ddd;border-radius: 5px;">
+                                           {{--  <div style="width: 100%;height: 20px;background-color: #ddd;border-radius: 5px;">
                                                 @if($postData->remaining_amount == 0)
                                                         
                                                         <p class="text-center">Donation Completed</p>
@@ -126,7 +126,24 @@
                                                     
                                                         @endif
                                                     </p>
-                                                </div>
+                                                </div> --}}
+                                                <div class="progress">
+                                                        <div class="progress__fill"></div>
+                                                        <span class="progress__text">0%</span>
+                                                    </div>
+                                                    <script>
+                                                        function updateProgressBar(progressBar, value) {
+                                                            value = Math.round(value);
+                                                            progressBar.querySelector(".progress__fill").style.width = `${value}%`;
+                                                            progressBar.querySelector(".progress__text").textContent = `${value}%`;
+                                                        }
+
+                                                        const myProgressBar = document.querySelector(".progress");
+
+                                                        /* Example */
+                                                        updateProgressBar(myProgressBar, {{ ($postData->remaining_amount/$postData->donation_amount)*100 }});
+                                                    </script>
+
                                         </td>
                                         <td>
                                             <form class="row g-3" action="{{ route('donate',['post_id' => $postData->id,'user_id' => $postData->user_id]) }}" method="post">
